@@ -148,12 +148,28 @@
             color: var(--text-muted);
             border: 1px solid var(--border-color);
         }
+        .fpga-card-img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            filter: grayscale(20%);
+            transition: all 0.4s ease;
+        }
+        .fpga-card:hover .fpga-card-img {
+            filter: grayscale(0%);
+            transform: scale(1.01);
+        }
         .fpga-card .btn-container {
             margin-top: 1.5rem;
             justify-content: flex-start;
         }
 
         @media screen and (max-width: 600px) {
+            .fpga-card-img {
+                height: 180px;
+            }
             .fpga-hero {
                 padding-top: 14vh;
             }
@@ -217,23 +233,46 @@
 
         <!-- Pipelined MIPS CPU -->
         <div class="fpga-card">
+            <img src="../assets/pipeline.png" alt="MIPS CPU pipeline block diagram" class="fpga-card-img" />
             <div class="fpga-card-header">
                 <h2>Pipelined MIPS CPU</h2>
                 <span class="course-tag">EE 180 &mdash; Lab 3</span>
             </div>
             <p>
-                A five-stage pipelined MIPS processor implemented in Verilog and synthesized for FPGA.
-                The pipeline includes full data-forwarding paths and hazard-detection logic with stalling
-                to resolve data and control hazards. The design also supports atomic read-modify-write
-                instructions for basic synchronization primitives.
+                A fully functional five-stage pipelined MIPS processor written in Verilog and synthesized
+                onto an FPGA development board. The processor implements the classic Instruction Fetch (IF),
+                Instruction Decode (ID), Execute (EX), Memory Access (MEM), and Write-Back (WB) pipeline
+                stages, closely following the canonical Patterson &amp; Hennessy architecture. Each stage is
+                separated by pipeline registers that latch control and data signals on every rising clock edge,
+                allowing up to five instructions to be in flight simultaneously.
+            </p>
+            <p>
+                One of the core challenges was handling pipeline hazards correctly. The design includes a
+                full forwarding (bypass) unit that detects RAW (read-after-write) data dependencies and
+                routes computed results from EX/MEM and MEM/WB stages directly back to the ALU inputs,
+                eliminating the majority of pipeline stalls. For cases where forwarding alone is insufficient
+                &mdash; such as load-use hazards where a load instruction is immediately followed by a
+                dependent instruction &mdash; a hazard detection unit inserts a single-cycle pipeline bubble
+                (stall) to ensure correct execution.
+            </p>
+            <p>
+                Control hazards from branch and jump instructions are handled with branch resolution in the
+                decode stage and pipeline flushing when a branch is taken. The design also includes support
+                for atomic instructions (load-linked / store-conditional style) that enable basic
+                synchronization primitives, which is critical for any multi-threaded or interrupt-driven
+                context. The entire processor was verified against a comprehensive suite of hand-written
+                MIPS assembly tests covering arithmetic, logic, memory, branching, and edge-case scenarios,
+                and then synthesized and tested on hardware to confirm correct timing and functionality.
             </p>
             <ul>
-                <li>Classic IF &rarr; ID &rarr; EX &rarr; MEM &rarr; WB pipeline stages</li>
-                <li>Forwarding unit eliminates most data-hazard stalls</li>
-                <li>Hazard detection with pipeline stalling for load-use dependencies</li>
-                <li>Atomic instruction support (LL/SC style synchronization)</li>
-                <li>Verified against a comprehensive hand-written assembly test suite</li>
-                <li>Synthesized and tested on FPGA development boards</li>
+                <li>Classic IF &rarr; ID &rarr; EX &rarr; MEM &rarr; WB pipeline with inter-stage registers</li>
+                <li>Full data-forwarding unit routing results from EX/MEM and MEM/WB back to ALU operands</li>
+                <li>Hazard detection logic with automatic stall insertion for load-use dependencies</li>
+                <li>Branch resolution in decode stage with pipeline flush on misprediction</li>
+                <li>Atomic LL/SC instruction support for hardware-level synchronization primitives</li>
+                <li>Separate instruction memory (imem) and data memory (dmem) modules for Harvard architecture</li>
+                <li>Custom decode, ALU, register file, and flip-flop modules built from scratch</li>
+                <li>Verified against a full assembly test suite, then synthesized and tested on FPGA boards</li>
             </ul>
             <div class="tech-tags">
                 <span class="tech-tag">Verilog</span>
@@ -241,6 +280,8 @@
                 <span class="tech-tag">FPGA Synthesis</span>
                 <span class="tech-tag">Pipelining</span>
                 <span class="tech-tag">Hazard Detection</span>
+                <span class="tech-tag">Data Forwarding</span>
+                <span class="tech-tag">Harvard Architecture</span>
             </div>
             <div class="btn-container">
                 <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/tkflare1/EE180lab3'">
@@ -251,35 +292,64 @@
 
         <!-- Sobel Edge Detection Accelerator -->
         <div class="fpga-card">
+            <img src="../assets/mt.png" alt="Sobel edge detection accelerator output" class="fpga-card-img" />
             <div class="fpga-card-header">
-                <h2>Sobel Edge Detection &mdash; Hardware Accelerator</h2>
+                <h2>Sobel Edge Detection &mdash; Hardware Accelerator &amp; ARM NEON Filters</h2>
                 <span class="course-tag">EE 180 &mdash; Lab 2</span>
             </div>
             <p>
-                A custom hardware accelerator for Sobel edge-detection filtering, designed for
-                real-time video processing on FPGA. Uses line-buffered streaming pipelines to process
-                incoming pixel data with minimal latency, avoiding the need to store full frames
-                in external memory.
+                A custom hardware accelerator for real-time Sobel edge-detection filtering, implemented
+                in Verilog and synthesized for FPGA. The accelerator processes a continuous stream of pixel
+                data from a video source, computing horizontal (Gx) and vertical (Gy) gradient magnitudes
+                using the standard 3&times;3 Sobel kernels. Rather than storing entire frames in off-chip
+                memory, the design uses a line-buffer architecture that retains only the two most recent
+                rows of pixels in on-chip SRAM, allowing it to produce output with minimal latency in a
+                true streaming fashion.
+            </p>
+            <p>
+                The datapath is fully pipelined to sustain one-pixel-per-clock throughput at the target
+                frequency. Each clock cycle, three pixels from three adjacent rows are read from the line
+                buffers, multiplied by the Sobel kernel coefficients, and accumulated into the Gx and Gy
+                partial sums. The final gradient magnitude is approximated using |Gx| + |Gy| (the
+                Manhattan-distance approximation), which avoids a costly square-root operation while still
+                producing visually accurate edge maps. A threshold comparator converts the magnitude into a
+                binary edge / non-edge output for clean visualization. The accelerator was validated against
+                known reference images, verified through synthesis timing reports, and demonstrated running
+                in real time on live video input on the FPGA board.
+            </p>
+            <p>
+                In addition to the hardware accelerator, this lab also involved implementing the same Sobel
+                filter pipeline entirely in software on an ARM processor, optimized with <strong>ARM NEON
+                SIMD intrinsics</strong>. The software implementation included both single-threaded and
+                multi-threaded versions of grayscale conversion and Sobel filtering. Using NEON 128-bit
+                vector registers, multiple pixels were processed in parallel per instruction, dramatically
+                increasing throughput. The multi-threaded version partitioned the image into horizontal
+                strips and processed them across cores using pthreads. Extensive benchmarking was performed
+                to measure throughput (frames per second) and latency scaling as a function of thread count,
+                providing a direct comparison between the hardware-accelerated and software-optimized
+                approaches.
             </p>
             <ul>
-                <li>Line-buffer architecture for single-pass 3&times;3 convolution</li>
-                <li>Pipelined datapath for sustained one-pixel-per-clock throughput</li>
-                <li>Separate horizontal and vertical gradient computation with magnitude approximation</li>
-                <li>Real-time edge detection demonstrated on live video input</li>
-                <li>Validated with synthesis timing reports and on-board functional tests</li>
+                <li>Line-buffer architecture retaining two rows of on-chip SRAM for single-pass 3&times;3 convolution</li>
+                <li>Fully pipelined datapath achieving sustained one-pixel-per-clock throughput</li>
+                <li>Separate Gx and Gy gradient computation with |Gx|+|Gy| magnitude approximation</li>
+                <li>Configurable threshold comparator for binary edge-map output</li>
+                <li>Real-time edge detection demonstrated on live FPGA video input</li>
+                <li>Validated with synthesis timing closure and on-board functional testing</li>
+                <li>ARM NEON SIMD software implementation processing multiple pixels per instruction</li>
+                <li>Multi-threaded (pthreads) grayscale and Sobel filters with image-strip partitioning</li>
+                <li>Throughput and latency benchmarks across 1&ndash;4 cores, comparing HW vs. SW performance</li>
             </ul>
-            <p>
-                The same lab also included <strong>ARM NEON optimized software filters</strong> &mdash;
-                single- and multi-threaded grayscale and Sobel implementations using NEON intrinsics,
-                benchmarked for throughput and latency scaling across cores.
-            </p>
             <div class="tech-tags">
                 <span class="tech-tag">Verilog</span>
                 <span class="tech-tag">FPGA</span>
                 <span class="tech-tag">Line Buffers</span>
                 <span class="tech-tag">Image Processing</span>
+                <span class="tech-tag">Sobel Filter</span>
                 <span class="tech-tag">ARM NEON</span>
+                <span class="tech-tag">SIMD Intrinsics</span>
                 <span class="tech-tag">Multithreading</span>
+                <span class="tech-tag">pthreads</span>
             </div>
             <div class="btn-container">
                 <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/tkflare1/ee180lab2final'">
@@ -290,21 +360,50 @@
 
         <!-- Dynamic Music Player -->
         <div class="fpga-card">
+            <img src="../assets/fpga.png" alt="FPGA music player VGA output" class="fpga-card-img" />
             <div class="fpga-card-header">
                 <h2>Dynamic Music Player &mdash; FPGA</h2>
                 <span class="course-tag">EE 108 &mdash; Final Project</span>
             </div>
             <p>
-                A fully hardware-based music synthesizer and player implemented on FPGA.
-                Custom Verilog modules generate chords, harmonics, echo, and dynamics
-                in a pipelined waveform-generation pipeline. Notes are rendered on-screen
-                through a VGA display controller.
+                A fully hardware-based music synthesizer and player implemented entirely in Verilog on an
+                FPGA development board. The system generates audio waveforms in real time using custom
+                digital signal processing modules, with no software or processor involved &mdash; all
+                computation happens in dedicated RTL. The audio pipeline begins with a note-sequencer that
+                reads from a song ROM and dispatches note-on / note-off events to a bank of tone generators.
+                Each tone generator produces a base-frequency square or sine-approximation waveform using a
+                phase accumulator clocked at the audio sample rate.
+            </p>
+            <p>
+                To produce richer, more musical tones, the design layers multiple harmonics on top of the
+                fundamental frequency using additive synthesis. A chord module allows multiple notes to
+                sound simultaneously by summing the outputs of several tone generators, each tuned to the
+                correct interval. Post-mixing effects include a feedback-delay echo/reverb module that
+                stores recent samples in a circular buffer and blends them back into the output with
+                configurable decay, as well as a dynamics module that modulates volume over time for
+                attack/decay envelopes. The final mixed audio signal is sent to the board's DAC for speaker
+                output.
+            </p>
+            <p>
+                In parallel, a VGA display controller renders a real-time visualization of the currently
+                playing notes on a connected monitor. The display pipeline generates the correct VGA timing
+                signals (hsync, vsync, blanking) and draws note indicators, a staff or keyboard graphic,
+                and dynamic highlighting as notes are struck. The entire project was designed in a modular
+                fashion with cleanly separated tone-generator, mixer, effects, sequencer, and display
+                modules, making each piece independently testable and reusable. This was the capstone final
+                project for EE108, combining skills in sequential logic design, pipelined datapath
+                construction, memory interfacing, and real-time I/O.
             </p>
             <ul>
-                <li>Pipelined waveform generation with additive harmonic synthesis</li>
-                <li>Chord playback, echo/reverb effects, and dynamic volume control</li>
-                <li>Real-time VGA note visualization and display rendering</li>
-                <li>Modular design with reusable tone-generator and mixer components</li>
+                <li>Phase-accumulator tone generators producing base-frequency waveforms at audio sample rate</li>
+                <li>Additive harmonic synthesis layering overtones for richer timbre</li>
+                <li>Chord module summing multiple simultaneous tone-generator outputs</li>
+                <li>Feedback-delay echo/reverb with circular sample buffer and configurable decay</li>
+                <li>Dynamics module implementing attack/decay volume envelopes</li>
+                <li>Song ROM sequencer dispatching note-on / note-off events in real time</li>
+                <li>Full VGA display controller with hsync, vsync, and blanking signal generation</li>
+                <li>Real-time on-screen note visualization with dynamic highlighting</li>
+                <li>Modular, independently testable architecture for each subsystem</li>
             </ul>
             <div class="tech-tags">
                 <span class="tech-tag">Verilog</span>
@@ -312,6 +411,9 @@
                 <span class="tech-tag">Audio Synthesis</span>
                 <span class="tech-tag">VGA Display</span>
                 <span class="tech-tag">Pipelining</span>
+                <span class="tech-tag">DAC Output</span>
+                <span class="tech-tag">Phase Accumulator</span>
+                <span class="tech-tag">Circular Buffer</span>
             </div>
             <div class="btn-container">
                 <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/tkflare1/ee108/tree/main/EE108/final_project'">
@@ -322,22 +424,48 @@
 
         <!-- Programmable Bike Light -->
         <div class="fpga-card">
+            <img src="../assets/fpga.png" alt="Programmable bike light waveform simulation" class="fpga-card-img" />
             <div class="fpga-card-header">
                 <h2>Programmable Bike Light</h2>
                 <span class="course-tag">EE 108 &mdash; Lab 2</span>
             </div>
             <p>
-                A configurable LED blinker system built from custom sequential logic in Verilog.
-                A Beat32 timing base drives a hierarchical timer and shifter controlled by a
-                master FSM. The blinker pattern, speed, and direction are all programmable
-                via on-board inputs.
+                A configurable LED blinker system built entirely from custom sequential logic in Verilog
+                and deployed on an FPGA board. The project focused on designing clean, hierarchical
+                sequential circuits using well-defined building blocks. At the foundation is a Beat32
+                timing module &mdash; a parameterizable clock divider that takes the board's high-frequency
+                oscillator and produces a slower "beat" pulse at a human-visible rate (defaulting to one
+                second). This beat signal drives all downstream sequential behavior, ensuring that every
+                module in the design operates on a shared, deterministic timing base.
+            </p>
+            <p>
+                On top of the Beat32, a timer module counts beat pulses and generates periodic trigger
+                events, while a shifter module uses a barrel-shift register to rotate an LED pattern
+                across the output pins. Both modules are orchestrated by a master finite state machine
+                (FSM) that manages mode transitions, responds to user button presses, and coordinates
+                the timer and shifter to produce the desired blinking behavior. The FSM supports multiple
+                modes &mdash; including different blink patterns, adjustable speeds, and reversible
+                shift directions &mdash; all selectable via the board's switches and push-buttons at
+                runtime.
+            </p>
+            <p>
+                A key design principle was building all sequential elements from explicitly defined
+                D flip-flop primitives (DFF, DFFAR with asynchronous reset, DFFARRE with asynchronous
+                reset and register enable). This avoided relying on synthesis tool inference for
+                register behavior and made the reset and enable semantics completely transparent in the
+                RTL. The entire design was simulated in a Verilog testbench before being loaded onto
+                the FPGA, where it drove physical LEDs in real time. By design choice, the system resets
+                to a one-second blink interval.
             </p>
             <ul>
-                <li>Beat32 clock divider as the timing base for all sequential logic</li>
-                <li>Hierarchical timer and barrel-shifter modules for pattern generation</li>
-                <li>Master FSM orchestrating mode transitions and user inputs</li>
-                <li>Custom D flip-flop primitives (DFF, DFFAR, DFFARRE) for clean reset behavior</li>
-                <li>Programmable blink rate, direction, and pattern via switches and buttons</li>
+                <li>Beat32 parameterizable clock divider generating a human-visible timing pulse</li>
+                <li>Timer module counting beat pulses and producing periodic trigger events</li>
+                <li>Barrel-shift register rotating LED patterns across output pins</li>
+                <li>Master FSM managing mode transitions, speed adjustment, and direction reversal</li>
+                <li>Runtime-configurable blink rate, pattern, and direction via switches and buttons</li>
+                <li>Custom DFF, DFFAR, and DFFARRE flip-flop primitives with explicit reset and enable</li>
+                <li>Fully simulated in Verilog testbench before hardware deployment</li>
+                <li>Synthesized and running on FPGA board driving physical LEDs</li>
             </ul>
             <div class="tech-tags">
                 <span class="tech-tag">Verilog</span>
@@ -345,6 +473,8 @@
                 <span class="tech-tag">FSM Design</span>
                 <span class="tech-tag">Sequential Logic</span>
                 <span class="tech-tag">D Flip-Flops</span>
+                <span class="tech-tag">Clock Divider</span>
+                <span class="tech-tag">Barrel Shifter</span>
             </div>
             <div class="btn-container">
                 <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/tkflare1/ee108/tree/main/EE108/lab2'">
@@ -355,22 +485,50 @@
 
         <!-- Password Authentication System -->
         <div class="fpga-card">
+            <img src="../assets/password.png" alt="Password authentication system on FPGA" class="fpga-card-img" />
             <div class="fpga-card-header">
                 <h2>Password Authentication System</h2>
                 <span class="course-tag">EE 108 &mdash; Lab 1</span>
             </div>
             <p>
-                A purely combinational hardware authentication module on FPGA. Incoming
-                usernames are matched against a Content-Addressable Memory (CAM) for
-                constant-time parallel lookup, and passwords are validated through a
-                custom hardware hash function with optimized propagation delay.
+                A purely combinational hardware authentication module implemented on FPGA that performs
+                real-time username lookup and hashed-password verification entirely in parallel logic,
+                with no clock, no sequential state, and no processor &mdash; just gates. The system
+                accepts a username and password input and produces an authenticated / not-authenticated
+                output within a single propagation delay through the combinational network, making it
+                effectively instantaneous from the perspective of any clocked system that consumes the
+                result.
+            </p>
+            <p>
+                The username lookup is built around a Content-Addressable Memory (CAM) structure. Unlike
+                a standard RAM that is addressed by location, a CAM is addressed by content: the input
+                username is compared against every stored username simultaneously in parallel. Each
+                entry contains a comparator that checks whether the input matches that row, and the
+                matching row's index is output. This means the lookup time is constant regardless of how
+                many entries are stored &mdash; there is no sequential iteration, no scanning, and no
+                hash-table probing. The CAM outputs both a "hit" signal indicating a match was found and
+                the associated row index used to fetch the stored password hash for that user.
+            </p>
+            <p>
+                Password validation uses a custom hardware hash function implemented in combinational
+                logic. The input password is passed through a chain of XOR, shift, and mix operations
+                that produce a fixed-width digest, which is then compared against the stored hash for the
+                matched username. The hash function was designed with propagation delay in mind &mdash;
+                the critical path through the hash logic was analyzed and minimized to keep the overall
+                combinational delay within the FPGA's timing budget at the target clock frequency (even
+                though the module itself is combinational, it must settle within one clock period of
+                whatever synchronous wrapper consumes it). The entire system was synthesized onto the
+                FPGA and tested with multiple username/password combinations to verify correct
+                accept/reject behavior.
             </p>
             <ul>
-                <li>Content-Addressable Memory for simultaneous username comparison</li>
-                <li>Custom combinational hash function for password validation</li>
-                <li>Constant-time search &mdash; no sequential iteration through entries</li>
-                <li>Optimized critical path for minimal propagation delay</li>
-                <li>Parallel processing of username and hashed-password comparison</li>
+                <li>Fully combinational design &mdash; no clock, no sequential state, pure gate-level logic</li>
+                <li>Content-Addressable Memory (CAM) comparing input against all stored usernames in parallel</li>
+                <li>Constant-time lookup regardless of number of stored entries</li>
+                <li>Custom combinational hash function using XOR, shift, and mix operations</li>
+                <li>Critical-path optimized for minimal propagation delay within timing budget</li>
+                <li>Parallel username match and password-hash comparison in a single pass</li>
+                <li>Synthesized and functionally tested on FPGA with multiple credential combinations</li>
             </ul>
             <div class="tech-tags">
                 <span class="tech-tag">Verilog</span>
@@ -378,6 +536,8 @@
                 <span class="tech-tag">Combinational Logic</span>
                 <span class="tech-tag">CAM</span>
                 <span class="tech-tag">Hashing</span>
+                <span class="tech-tag">Timing Analysis</span>
+                <span class="tech-tag">Gate-Level Design</span>
             </div>
             <div class="btn-container">
                 <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/tkflare1/ee108/tree/main/EE108/lab1'">
@@ -388,23 +548,55 @@
 
         <!-- LLM Hardware Eval Harness -->
         <div class="fpga-card">
+            <img src="../assets/pipeline.png" alt="LLM hardware evaluation harness" class="fpga-card-img" />
             <div class="fpga-card-header">
                 <h2>LLM Hardware Eval Harness</h2>
                 <span class="course-tag">Research</span>
             </div>
             <p>
-                A research harness that evaluates how well large language models can generate
-                correct hardware (Verilog) code. The harness includes two evaluation tasks:
-                a MIPS32 CPU lab with a full Verilog testbench and hand-written assembly test suite,
-                and a multiply-accumulate (MAC) task for quick sanity-checking of LLM code generation.
+                A research-grade evaluation harness designed to systematically measure how well large
+                language models (LLMs) can generate functionally correct hardware description code
+                (Verilog). The central question driving this project is: given a natural-language
+                specification of a digital circuit and the exact module interface (port list), can an LLM
+                produce synthesizable Verilog that passes a rigorous testbench? The harness automates the
+                entire pipeline from prompt construction, to candidate generation via the OpenAI API, to
+                compilation with Icarus Verilog, to simulation against gold-standard testbenches, and
+                finally to statistical scoring using the pass@k metric.
+            </p>
+            <p>
+                The primary evaluation target is a <strong>MIPS32 CPU</strong>. The harness includes a
+                complete Verilog testbench (<code>tb_cpu.v</code>) along with a suite of hand-written
+                assembly test programs covering arithmetic, logic, memory access, branching, and
+                edge-case instructions. Each assembly test is cross-compiled using Clang targeting
+                <code>mips-unknown-elf</code>, linked with <code>ld.lld</code> in big-endian MIPS32 mode
+                using a custom linker script, converted to raw binary via <code>llvm-objcopy</code>,
+                and then transformed into a <code>$readmemh</code>-compatible hex file by a Python script.
+                The testbench loads the hex image into instruction memory, runs the CPU, and watches
+                for MMIO writes to a status register &mdash; a write of <code>status=1</code> to
+                address <code>0x8002_0000</code> signals a passing test.
+            </p>
+            <p>
+                A secondary, lighter-weight evaluation task uses a <strong>multiply-accumulate (MAC)</strong>
+                module. This simpler circuit serves as a quick sanity check for LLM code generation quality
+                before running the more expensive CPU evaluation. It has its own prompt, testbench, and
+                reference output. The harness supports configurable candidate counts (N), model selection
+                via environment variable (<code>LLM_MODEL</code>), and stores all generated candidates as
+                JSONL files alongside simulation logs. The entire toolchain runs on macOS with Homebrew
+                packages (Icarus Verilog, LLVM, lld) and is structured so the LLM evaluation flow runs
+                alongside &mdash; but does not interfere with &mdash; the standard manual CPU development
+                and testing workflow.
             </p>
             <ul>
-                <li>MIPS32 single-cycle and 5-stage pipelined CPU as the primary eval target</li>
-                <li>Hand-written assembly tests assembled with Clang/LLVM for big-endian MIPS</li>
-                <li>Automated candidate generation via OpenAI API with configurable model selection</li>
-                <li>Scoring pipeline: compile generated Verilog with Icarus Verilog, simulate against testbench, compute pass@k</li>
-                <li>MAC sub-task with prompt, testbench, and reference output for lightweight evaluation</li>
-                <li>Runs on macOS with Homebrew (Icarus Verilog + LLVM toolchain)</li>
+                <li>End-to-end pipeline: prompt &rarr; LLM generation &rarr; compile &rarr; simulate &rarr; pass@k scoring</li>
+                <li>MIPS32 CPU as primary eval target with full testbench and assembly test suite</li>
+                <li>Cross-compilation toolchain: Clang + ld.lld + llvm-objcopy for big-endian MIPS32 ELF binaries</li>
+                <li>Custom linker script enforcing entry point and memory layout for testbench compatibility</li>
+                <li>MMIO-based pass/fail signaling in testbench (status register at 0x8002_0000)</li>
+                <li>MAC sub-task for lightweight, fast-turnaround evaluation</li>
+                <li>Automated candidate generation via OpenAI API with configurable model and sample count</li>
+                <li>Module-name enforcement ensuring LLM output matches testbench port interface exactly</li>
+                <li>JSONL candidate storage with per-candidate simulation logs for reproducibility</li>
+                <li>Non-invasive design: LLM eval flow coexists with manual development workflow</li>
             </ul>
             <div class="tech-tags">
                 <span class="tech-tag">Verilog</span>
@@ -414,6 +606,8 @@
                 <span class="tech-tag">LLM Evaluation</span>
                 <span class="tech-tag">OpenAI API</span>
                 <span class="tech-tag">Clang / LLVM</span>
+                <span class="tech-tag">pass@k Metric</span>
+                <span class="tech-tag">MIPS Assembly</span>
             </div>
             <div class="btn-container">
                 <button class="btn btn-color-2 project-btn" onclick="location.href='https://github.com/tkflare1/research_llm_evaluation'">
