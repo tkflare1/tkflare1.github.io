@@ -1,8 +1,3 @@
-// ============================
-// PORTFOLIO INTERACTIONS
-// ============================
-
-// Toggle hamburger menu
 function toggleMenu() {
     const menu = document.querySelector(".menu-links");
     const icon = document.querySelector(".hamburger-icon");
@@ -10,194 +5,135 @@ function toggleMenu() {
     icon.classList.toggle("open");
 }
 
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
+document.addEventListener("click", (e) => {
     const menu = document.querySelector(".menu-links");
     const hamburger = document.querySelector(".hamburger-menu");
-    
-    if (menu && hamburger && !hamburger.contains(e.target) && menu.classList.contains('open')) {
-        menu.classList.remove('open');
-        document.querySelector(".hamburger-icon").classList.remove('open');
+    if (menu && hamburger && !hamburger.contains(e.target) && menu.classList.contains("open")) {
+        menu.classList.remove("open");
+        document.querySelector(".hamburger-icon").classList.remove("open");
     }
 });
 
-// Smooth scroll for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+function getHashTarget(href) {
+    if (!href || href === "#") return null;
+    const i = href.indexOf("#");
+    if (i === -1) return null;
+    const id = href.slice(i + 1);
+    if (!id) return null;
+    return document.getElementById(id);
+}
+
+document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        if (href.startsWith("http") || href.startsWith("mailto:")) return;
+        const target = getHashTarget(href);
+        if (!target) return;
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 });
 
-// Intersection Observer for scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+const observerOptions = { threshold: 0.12, rootMargin: "0px 0px -40px 0px" };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
+            entry.target.classList.add("animate-in");
             observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe all animatable elements
-document.addEventListener('DOMContentLoaded', () => {
-    // Add animation classes
+document.addEventListener("DOMContentLoaded", () => {
     const animateElements = document.querySelectorAll(
-        '.details-container, .color-container, article, .text-container, .contact-info-upper-container'
+        ".work-item, .about__grid, .page-header, .skill-sheet, .contact-block .layout-wrap"
     );
-    
     animateElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.6s ease ${index * 0.05}s, transform 0.6s ease ${index * 0.05}s`;
+        el.style.opacity = "0";
+        el.style.transform = "translateY(28px)";
+        el.style.transition = `opacity 0.55s ease ${index * 0.04}s, transform 0.55s ease ${index * 0.04}s`;
         observer.observe(el);
     });
 });
 
-// Add animate-in class styles dynamically
-const style = document.createElement('style');
-style.textContent = `
+const animStyle = document.createElement("style");
+animStyle.textContent = `
     .animate-in {
         opacity: 1 !important;
         transform: translateY(0) !important;
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(animStyle);
 
-// Navbar background on scroll (both desktop and mobile nav bars)
-const navBars = document.querySelectorAll('body > nav');
-let lastScrollY = window.scrollY;
-
-window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-
+const navBars = document.querySelectorAll("body > nav");
+window.addEventListener("scroll", () => {
+    const y = window.scrollY;
     navBars.forEach((navEl) => {
-        if (currentScrollY > 100) {
-            navEl.style.background = 'rgba(10, 10, 10, 0.96)';
-            navEl.style.boxShadow = '0 1px 0 rgba(255, 255, 255, 0.06)';
+        if (y > 80) {
+            navEl.style.background = "rgba(6, 6, 5, 0.94)";
+            navEl.style.boxShadow = "0 1px 0 rgba(255,255,255,0.06)";
         } else {
-            navEl.style.background = 'rgba(10, 10, 10, 0.85)';
-            navEl.style.boxShadow = 'none';
+            navEl.style.background = "rgba(6, 6, 5, 0.82)";
+            navEl.style.boxShadow = "none";
         }
     });
-
-    lastScrollY = currentScrollY;
 });
 
-// Parallax effect for profile section
-const profileSection = document.getElementById('profile');
-const profilePic = document.querySelector('.profile-pic');
-
-window.addEventListener('scroll', () => {
-    if (profileSection && profilePic) {
-        const scrolled = window.scrollY;
-        const rate = scrolled * 0.3;
-        
-        if (scrolled < window.innerHeight) {
-            profilePic.style.transform = `translateY(${rate * 0.1}px)`;
-        }
-    }
-});
-
-// Typing effect for title (optional enhancement)
-function typeWriter(element, text, speed = 50) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
-// Add cursor glow effect
-document.addEventListener('mousemove', (e) => {
-    const cursor = document.querySelector('.cursor-glow');
+document.addEventListener("mousemove", (e) => {
+    const cursor = document.querySelector(".cursor-glow");
     if (cursor) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
     }
 });
 
-// Create cursor glow element
-const cursorGlow = document.createElement('div');
-cursorGlow.className = 'cursor-glow';
+const cursorGlow = document.createElement("div");
+cursorGlow.className = "cursor-glow";
 cursorGlow.style.cssText = `
     position: fixed;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(212, 255, 77, 0.04) 0%, transparent 68%);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
     z-index: -1;
-    transition: opacity 0.3s ease;
 `;
 document.body.appendChild(cursorGlow);
 
-// Active navigation link highlighting
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll("main section[id]");
+const navLinks = document.querySelectorAll(".nav-links a");
 
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.scrollY >= sectionTop - 200) {
-            current = section.getAttribute('id');
+window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach((section) => {
+        const top = section.offsetTop;
+        if (window.scrollY >= top - 120) {
+            current = section.getAttribute("id");
         }
     });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
+    navLinks.forEach((link) => {
+        const href = link.getAttribute("href") || "";
+        link.classList.remove("active");
+        if (href === `#${current}`) link.classList.add("active");
     });
 });
 
-// Add active link styles
-const activeStyle = document.createElement('style');
+const activeStyle = document.createElement("style");
 activeStyle.textContent = `
-    .nav-links a.active {
-        color: #f5f5f5 !important;
-    }
-    .nav-links a.active::after {
-        width: 100%;
-    }
+    .nav-links a.active { color: #eeebe6 !important; }
+    .nav-links a.active::after { width: 100%; }
 `;
 document.head.appendChild(activeStyle);
 
-// Smooth button interactions
-document.querySelectorAll('.btn').forEach(btn => {
-    btn.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-3px) scale(1.02)';
+document.querySelectorAll(".btn").forEach((btn) => {
+    btn.addEventListener("mouseenter", function () {
+        this.style.transform = "translateY(-2px)";
     });
-    
-    btn.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
+    btn.addEventListener("mouseleave", function () {
+        this.style.transform = "translateY(0)";
     });
 });
 
-// Console easter egg
-console.log('%cHey there, fellow developer.', 'font-size: 16px; font-weight: bold; color: #e5e5e5;');
-console.log('%cThanks for checking out my portfolio. Feel free to reach out!', 'font-size: 14px; color: #a0a0a0;');
-console.log('%c- Tawedzerwa Keith Vhurumuku', 'font-size: 12px; color: #666;');
+console.log("%cTKV portfolio", "font-weight:bold;color:#d4ff4d;font-size:14px");

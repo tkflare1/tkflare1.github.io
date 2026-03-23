@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#060605">
+    <title>Projects — Tawedzerwa Keith Vhurumuku</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="mediaqueries.css"/>
+</head>
+<body>
+    <nav id="desktop-nav">
+        <a href="./#profile" class="logo">T. Keith Vhurumuku</a>
+        <div>
+            <ul class="nav-links">
+                <li><a href="./#about">About</a></li>
+                <li><a href="./projects.html" aria-current="page">Work</a></li>
+                <li><a href="./skills.html">Skills</a></li>
+                <li><a href="./fpga/">FPGA</a></li>
+                <li><a href="./#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <nav id="hamburger-nav">
+        <a href="./#profile" class="logo">T. Keith Vhurumuku</a>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="./#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="./projects.html" onclick="toggleMenu()">Work</a></li>
+                <li><a href="./skills.html" onclick="toggleMenu()">Skills</a></li>
+                <li><a href="./fpga/" onclick="toggleMenu()">FPGA</a></li>
+                <li><a href="./#contact" onclick="toggleMenu()">Contact</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-main">
+        <section class="section-block">
+            <div class="layout-wrap">
+                <header class="page-header">
+                    <p class="page-header__eyebrow">Archive</p>
+                    <h1 class="title--page">All projects</h1>
+                    <p class="page-header__lede">Software, mobile, embedded, and hardware — roughly newest first.</p>
+                </header>
+
+                <div class="work-list">
+
+                    <article class="work-item">
+                        <span class="work-item__index">01</span>
+                        <a class="work-item__media" href="https://web-rose-one-95.vercel.app" target="_blank" rel="noopener noreferrer"><img src="./assets/ridematch-screenshot.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">Web</span>
+                            <h2 class="work-item__title">RideMatch — student ridesharing</h2>
+                            <p class="work-item__desc">Next.js 16, Tailwind v4, Zustand, Firebase. Swipeable ride cards, chat, requests, ratings, blocking, message deletion.</p>
+                            <div class="work-item__links">
+                                <a class="work-link" href="https://github.com/tkflare1/ride-sharing" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="work-link" href="https://web-rose-one-95.vercel.app" target="_blank" rel="noopener noreferrer">Live</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">02</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/fishassist" target="_blank" rel="noopener noreferrer"><img src="./assets/fishassist-dashboard.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">Flutter</span>
+                            <h2 class="work-item__title">FishAssist — smart fish farming</h2>
+                            <p class="work-item__desc">Telemetry, ML forecasting, anomaly detection, actuators, inventory, weather, multilingual.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/fishassist" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">03</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/robot-car" target="_blank" rel="noopener noreferrer"><img src="./assets/robotcar-closeup.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">Embedded</span>
+                            <h2 class="work-item__title">Robot car + WiFi camera</h2>
+                            <p class="work-item__desc">Three STM32L4, glove control, motors, OV2640 + ESP32 stream, Next.js viewer.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/robot-car" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">04</span>
+                        <a class="work-item__media" href="https://agents-starter.keithvhuru.workers.dev/" target="_blank" rel="noopener noreferrer"><img src="./assets/assistant.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">Cloudflare</span>
+                            <h2 class="work-item__title">AI network troubleshooting agent</h2>
+                            <p class="work-item__desc">Agents, Durable Objects, incidents and tasks with persistent state.</p>
+                            <div class="work-item__links">
+                                <a class="work-link" href="https://github.com/your-username/ai-network-troubleshooting-agent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="work-link" href="https://agents-starter.keithvhuru.workers.dev/" target="_blank" rel="noopener noreferrer">Demo</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">05</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/final-project-sample" target="_blank" rel="noopener noreferrer"><img src="./assets/parks.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">iOS · Swift</span>
+                            <h2 class="work-item__title">WanderWise — travel planner</h2>
+                            <p class="work-item__desc">Discover, favorites, trips, AI travel tips; networking and persistence.</p>
+                            <div class="work-item__links">
+                                <a class="work-link" href="https://github.com/tkflare1/final-project-sample" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="work-link" href="https://cdn.loom.com/sessions/thumbnails/83037535d3b64c3fb48403d9bd72f066-0d0da708c200cafd-full-play.gif" target="_blank" rel="noopener noreferrer">Demo</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">06</span>
+                        <a class="work-item__media" href="https://empower-lilac.vercel.app/" target="_blank" rel="noopener noreferrer"><img src="./assets/blog.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">Next.js · Sanity</span>
+                            <h2 class="work-item__title">Personal blog</h2>
+                            <p class="work-item__desc">CMS-backed posts, rich content, TypeScript.</p>
+                            <div class="work-item__links">
+                                <a class="work-link" href="https://github.com/tkflare1/empower-website" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="work-link" href="https://empower-lilac.vercel.app/" target="_blank" rel="noopener noreferrer">Live</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">07</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/EE180lab3" target="_blank" rel="noopener noreferrer"><img src="./assets/pipeline.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">FPGA</span>
+                            <h2 class="work-item__title">Pipelined MIPS CPU</h2>
+                            <p class="work-item__desc">Five-stage pipeline, forwarding, stalling, atomic instructions, testbenches.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/EE180lab3" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">08</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/ee180lab2final" target="_blank" rel="noopener noreferrer"><img src="./assets/mt.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">FPGA</span>
+                            <h2 class="work-item__title">Sobel edge detection accelerator</h2>
+                            <p class="work-item__desc">Line-buffered pipeline, real-time video edges, synthesis and bring-up.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/ee180lab2final" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">09</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/ee180lab2final" target="_blank" rel="noopener noreferrer"><img src="./assets/mt.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">ARM NEON</span>
+                            <h2 class="work-item__title">NEON video filters</h2>
+                            <p class="work-item__desc">Grayscale and Sobel with intrinsics; single- and multi-threaded benchmarks.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/ee180lab2final" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">10</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/ee108/tree/main/EE108/lab2" target="_blank" rel="noopener noreferrer"><img src="./assets/fpga.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">Verilog</span>
+                            <h2 class="work-item__title">Programmable bike light</h2>
+                            <p class="work-item__desc">Timers, shifter, FSM, DFF-based sequential logic.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/ee108/tree/main/EE108/lab2" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">11</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/curtain-opener" target="_blank" rel="noopener noreferrer"><img src="./assets/curtain-design.jpg" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">Bare-metal C</span>
+                            <h2 class="work-item__title">Mango Pi curtain opener</h2>
+                            <p class="work-item__desc">RTC and I2C drivers, IR remote, shell commands.</p>
+                            <div class="work-item__links">
+                                <a class="work-link" href="https://github.com/tkflare1/curtain-opener" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a class="work-link" href="./assets/curtain.mp4">Video</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">12</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/ee108/tree/main/EE108/final_project" target="_blank" rel="noopener noreferrer"><img src="./assets/fpga.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">FPGA · VGA</span>
+                            <h2 class="work-item__title">Dynamic music player</h2>
+                            <p class="work-item__desc">Chords, harmonics, echo, dynamics, pipelined audio + VGA display.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/ee108/tree/main/EE108/final_project" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">13</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/enigma" target="_blank" rel="noopener noreferrer"><img src="./assets/EnigmaTopView.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">JavaScript</span>
+                            <h2 class="work-item__title">Enigma simulation</h2>
+                            <p class="work-item__desc">Rotor logic and UI for encryption / decryption demos.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/enigma" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <span class="work-item__index">14</span>
+                        <a class="work-item__media" href="https://github.com/tkflare1/ee108/tree/main/EE108/lab1" target="_blank" rel="noopener noreferrer"><img src="./assets/password.png" alt=""/></a>
+                        <div class="work-item__body">
+                            <span class="work-item__tag">FPGA</span>
+                            <h2 class="work-item__title">Password authentication system</h2>
+                            <p class="work-item__desc">Parallel username compare, CAM-style search, custom hardware hash path.</p>
+                            <div class="work-item__links"><a class="work-link" href="https://github.com/tkflare1/ee108/tree/main/EE108/lab1" target="_blank" rel="noopener noreferrer">GitHub</a></div>
+                        </div>
+                    </article>
+                </div>
+
+                <p class="page-back"><a href="./">← Home</a> · <a href="./skills.html">Skills</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <div class="nav-links-container">
+                <ul class="nav-links">
+                    <li><a href="./#about">About</a></li>
+                    <li><a href="./projects.html">Work</a></li>
+                    <li><a href="./skills.html">Skills</a></li>
+                    <li><a href="./fpga/">FPGA</a></li>
+                    <li><a href="./#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p>© 2025 Tawedzerwa Keith Vhurumuku</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#060605">
+    <title>Skills — Tawedzerwa Keith Vhurumuku</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="mediaqueries.css"/>
+</head>
+<body>
+    <nav id="desktop-nav">
+        <a href="./#profile" class="logo">T. Keith Vhurumuku</a>
+        <div>
+            <ul class="nav-links">
+                <li><a href="./#about">About</a></li>
+                <li><a href="./projects.html">Work</a></li>
+                <li><a href="./skills.html" aria-current="page">Skills</a></li>
+                <li><a href="./fpga/">FPGA</a></li>
+                <li><a href="./#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    <nav id="hamburger-nav">
+        <a href="./#profile" class="logo">T. Keith Vhurumuku</a>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="./#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="./projects.html" onclick="toggleMenu()">Work</a></li>
+                <li><a href="./skills.html" onclick="toggleMenu()">Skills</a></li>
+                <li><a href="./fpga/" onclick="toggleMenu()">FPGA</a></li>
+                <li><a href="./#contact" onclick="toggleMenu()">Contact</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-main">
+        <section class="section-block">
+            <div class="layout-wrap">
+                <header class="page-header">
+                    <p class="page-header__eyebrow">Capabilities</p>
+                    <h1 class="title--page">Skills sheet</h1>
+                    <p class="page-header__lede">What I reach for most often — not an exhaustive vendor list.</p>
+                </header>
+
+                <div class="skill-sheet">
+                    <div class="skill-sheet__col">
+                        <h2>Software</h2>
+                        <ul class="skill-sheet__list">
+                            <li><span class="skill-sheet__name">Python</span><span class="skill-sheet__lvl">Experienced</span></li>
+                            <li><span class="skill-sheet__name">C / C++</span><span class="skill-sheet__lvl">Experienced</span></li>
+                            <li><span class="skill-sheet__name">HTML / CSS</span><span class="skill-sheet__lvl">Experienced</span></li>
+                            <li><span class="skill-sheet__name">JavaScript</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Assembly (RISC-V, MIPS)</span><span class="skill-sheet__lvl">Experienced</span></li>
+                            <li><span class="skill-sheet__name">Swift</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">React</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Node.js</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">iOS development</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Machine learning</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Git</span><span class="skill-sheet__lvl">Experienced</span></li>
+                            <li><span class="skill-sheet__name">Linux</span><span class="skill-sheet__lvl">Experienced</span></li>
+                            <li><span class="skill-sheet__name">Unix</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">QA testing</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                        </ul>
+                    </div>
+                    <div class="skill-sheet__col">
+                        <h2>Electrical &amp; hardware</h2>
+                        <ul class="skill-sheet__list">
+                            <li><span class="skill-sheet__name">Verilog / SystemVerilog (RTL)</span><span class="skill-sheet__lvl">Advanced</span></li>
+                            <li><span class="skill-sheet__name">Digital logic &amp; FSM</span><span class="skill-sheet__lvl">Advanced</span></li>
+                            <li><span class="skill-sheet__name">FPGA design &amp; synthesis</span><span class="skill-sheet__lvl">Advanced</span></li>
+                            <li><span class="skill-sheet__name">Timing (STA)</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">ASIC flow &amp; PPA</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">RTL verification</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Systolic arrays / accelerators</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Memory (SRAM / eDRAM)</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Embedded C, I2C, SPI, RTC</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">ARM NEON</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Sobel / signal on hardware</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">VGA / display pipelines</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                            <li><span class="skill-sheet__name">Power electronics / motors</span><span class="skill-sheet__lvl">Beginner–Int.</span></li>
+                            <li><span class="skill-sheet__name">PCB basics</span><span class="skill-sheet__lvl">Beginner–Int.</span></li>
+                            <li><span class="skill-sheet__name">UART, I2C, SPI</span><span class="skill-sheet__lvl">Intermediate</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="page-back"><a href="./projects.html">Work archive →</a> · <a href="./">Home</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <div class="nav-links-container">
+                <ul class="nav-links">
+                    <li><a href="./#about">About</a></li>
+                    <li><a href="./projects.html">Work</a></li>
+                    <li><a href="./skills.html">Skills</a></li>
+                    <li><a href="./fpga/">FPGA</a></li>
+                    <li><a href="./#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p>© 2025 Tawedzerwa Keith Vhurumuku</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
