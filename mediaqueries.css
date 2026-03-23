@@ -1,5 +1,5 @@
 @media screen and (max-width: 1024px) {
-    .hero__grid {
+    .hero__inner {
         grid-template-columns: 1fr;
         text-align: center;
     }
@@ -9,89 +9,84 @@
         margin-right: auto;
     }
 
-    .hero__actions {
+    .hero__actions { justify-content: center; }
+    .hero__socials { justify-content: center; }
+
+    .hero__photo {
+        display: flex;
         justify-content: center;
+        order: -1;
     }
 
-    .hero__socials {
-        justify-content: center;
-    }
-
-    .hero__portrait {
-        justify-self: center;
-        margin-top: 1rem;
-    }
-
-    .about__grid {
+    .about {
         grid-template-columns: 1fr;
     }
 
-    .work-item {
-        grid-template-columns: 3rem 1fr;
-        grid-template-rows: auto auto;
+    .featured {
+        grid-template-columns: 1fr;
     }
 
-    .work-item__index {
-        grid-row: 1 / 3;
+    .featured:nth-child(even) .featured__img { order: 0; }
+    .featured:nth-child(even) .featured__info { order: 0; }
+
+    .archive-row {
+        grid-template-columns: 1fr auto;
+        row-gap: 0.15rem;
     }
 
-    .work-item__media {
-        grid-column: 2;
+    .archive-row__desc {
+        grid-column: 1 / -1;
+        font-size: 0.82rem;
     }
 
-    .work-item__body {
-        grid-column: 2;
+    .archive-row__tech {
+        grid-column: 1;
+        text-align: left;
     }
 
-    .skill-sheet {
+    .skills {
         grid-template-columns: 1fr;
     }
 }
 
 @media screen and (max-width: 768px) {
-    #desktop-nav {
-        display: none !important;
+    #desktop-nav { display: none !important; }
+    #hamburger-nav { display: flex !important; }
+
+    .hero { min-height: 70vh; }
+
+    .hero__name {
+        font-size: clamp(2rem, 9vw, 3rem);
     }
 
-    #hamburger-nav {
-        display: flex !important;
+    .hero__portrait {
+        width: 140px;
+        height: 140px;
     }
 
-    .nav-links {
-        gap: 1rem;
-    }
-
-    .work-item {
+    .about__fact {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
+        gap: 0.25rem;
     }
 
-    .work-item__index {
-        grid-row: auto;
+    .featured__desc { max-width: none; }
+
+    .archive-row {
+        grid-template-columns: 1fr auto;
     }
 
-    .work-item__media {
-        grid-column: 1;
-        max-height: 200px;
+    .footer__inner {
+        flex-direction: column;
+        text-align: center;
     }
 
-    .work-item__body {
-        grid-column: 1;
-    }
-
-    .about__facts-row {
-        grid-template-columns: 1fr;
-        gap: 0.35rem;
+    footer .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .marquee__inner,
-    .hero__orbit {
-        animation: none !important;
-    }
-
-    html {
-        scroll-behavior: auto;
-    }
+    html { scroll-behavior: auto; }
+    .fade-in { opacity: 1; transform: none; transition: none; }
 }

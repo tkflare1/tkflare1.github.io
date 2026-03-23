@@ -3,36 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#060605">
-    <title>Tawedzerwa Keith Vhurumuku</title>
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Tawedzerwa Keith Vhurumuku — Portfolio</title>
     <link rel="stylesheet" href="style.css"/>
     <link rel="stylesheet" href="mediaqueries.css"/>
 </head>
 <body>
     <nav id="desktop-nav">
-        <a href="#profile" class="logo">T. Keith Vhurumuku</a>
-        <div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="skills.html">Skills</a></li>
-                <li><a href="fpga/">FPGA</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
+        <a href="#" class="logo">Keith Vhurumuku</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="fpga/">FPGA</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
     <nav id="hamburger-nav">
-        <a href="#profile" class="logo">T. Keith Vhurumuku</a>
+        <a href="#" class="logo">Keith Vhurumuku</a>
         <div class="hamburger-menu">
             <div class="hamburger-icon" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
             <div class="menu-links">
                 <li><a href="#about" onclick="toggleMenu()">About</a></li>
-                <li><a href="#work" onclick="toggleMenu()">Work</a></li>
-                <li><a href="skills.html" onclick="toggleMenu()">Skills</a></li>
+                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
                 <li><a href="fpga/" onclick="toggleMenu()">FPGA</a></li>
                 <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
             </div>
@@ -40,169 +36,237 @@
     </nav>
 
     <main>
-        <section id="profile" class="hero">
-            <div class="hero__grid">
-                <div class="hero__copy">
-                    <p class="hero__eyebrow">Portfolio · 2025</p>
-                    <h1 class="hero__name">
-                        <span>Tawedzerwa</span>
-                        <span class="hero__name-accent">(Keith)</span>
-                    </h1>
-                    <p class="hero__tagline">Software and electrical engineering: shipping full-stack apps, embedded systems, and RTL when the problem needs silicon too.</p>
+        <!-- ══ Hero ══ -->
+        <section id="hero" class="hero">
+            <div class="container hero__inner">
+                <div class="hero__text">
+                    <p class="mono-label">Software &amp; Electrical Engineer</p>
+                    <h1 class="hero__name">Tawedzerwa<br>(Keith) Vhurumuku</h1>
+                    <p class="hero__tagline">Building full-stack apps, embedded systems, and hardware accelerators at Stanford.</p>
                     <div class="hero__actions">
-                        <button type="button" class="btn btn--primary" onclick="window.open('./assets/Tawedzerwa_Vhurumuku_resume.pdf')">Resume</button>
-                        <button type="button" class="btn btn--ghost" onclick="location.href='#contact'">Contact</button>
-                        <button type="button" class="btn btn--ghost" onclick="location.href='projects.html'">All projects</button>
+                        <button class="btn btn-filled" onclick="window.open('./assets/Tawedzerwa_Vhurumuku_resume.pdf')">Resume</button>
+                        <button class="btn btn-outline" onclick="location.href='#contact'">Get in touch</button>
                     </div>
                     <div class="hero__socials">
-                        <a href="https://www.linkedin.com/in/tawedzerwa-vhurumuku/" aria-label="LinkedIn"><img src="./assets/linkedin.png" alt=""/></a>
-                        <a href="https://github.com/tkflare1" aria-label="GitHub"><img src="./assets/github.png" alt=""/></a>
+                        <a href="https://www.linkedin.com/in/tawedzerwa-vhurumuku/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="./assets/linkedin.png" alt=""/></a>
+                        <a href="https://github.com/tkflare1" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><img src="./assets/github.png" alt=""/></a>
                     </div>
                 </div>
-                <figure class="hero__portrait">
-                    <div class="hero__orbit" aria-hidden="true"></div>
-                    <img src="./assets/my_image.JPG" alt="Portrait of Keith" class="profile-pic" width="320" height="320"/>
-                </figure>
+                <div class="hero__photo">
+                    <img src="./assets/my_image.JPG" alt="Tawedzerwa Keith Vhurumuku" class="hero__portrait"/>
+                </div>
             </div>
-            <div class="marquee" aria-hidden="true">
-                <div class="marquee__inner">
-                    <div class="marquee__segment">
-                        <span>Stanford</span> EE + CS · Full-stack · RTL · FPGAs · STM32 · Next.js · Python ·
-                        <span>Stanford</span> EE + CS · Full-stack · RTL · FPGAs · STM32 · Next.js · Python ·
+        </section>
+
+        <!-- ══ About ══ -->
+        <section id="about" class="section">
+            <div class="container">
+                <p class="mono-label">About</p>
+                <h2 class="section__heading">A bit about me</h2>
+                <div class="about">
+                    <div class="about__bio">
+                        <p>I'm a Stanford EE/CS student with 2+ years of experience across software development and hardware engineering — through internships, R&amp;D, coursework, and personal projects.</p>
+                        <p>I work across the full stack: from React and Next.js frontends to bare-metal embedded systems to RTL on FPGAs. I care about finishing what I start and writing code that others can maintain.</p>
                     </div>
-                    <div class="marquee__segment">
-                        <span>Stanford</span> EE + CS · Full-stack · RTL · FPGAs · STM32 · Next.js · Python ·
-                        <span>Stanford</span> EE + CS · Full-stack · RTL · FPGAs · STM32 · Next.js · Python ·
+                    <dl class="about__facts">
+                        <div class="about__fact">
+                            <dt>Education</dt>
+                            <dd>Stanford University — B.S. Electrical Engineering &amp; Computer Science</dd>
+                        </div>
+                        <div class="about__fact">
+                            <dt>Focus</dt>
+                            <dd>Web &amp; mobile · Embedded systems · RTL / FPGA design</dd>
+                        </div>
+                        <div class="about__fact">
+                            <dt>Experience</dt>
+                            <dd>2+ years of software development and hardware engineering</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ Projects ══ -->
+        <section id="projects" class="section">
+            <div class="container">
+                <p class="mono-label">Projects</p>
+                <h2 class="section__heading">Featured work</h2>
+
+                <div class="featured">
+                    <a class="featured__img" href="https://web-rose-one-95.vercel.app" target="_blank" rel="noopener noreferrer">
+                        <img src="./assets/ridematch-screenshot.png" alt="RideMatch interface"/>
+                    </a>
+                    <div class="featured__info">
+                        <p class="mono-label">Web application</p>
+                        <h3 class="featured__title">RideMatch — Student Ridesharing</h3>
+                        <p class="featured__desc">A ridesharing web app for students to find trusted ride buddies to the airport. Swipeable ride cards, real-time chat, connection requests, a rating system, and privacy controls.</p>
+                        <div class="tags"><span>Next.js</span><span>Tailwind</span><span>Zustand</span><span>Firebase</span></div>
+                        <div class="featured__links">
+                            <a href="https://github.com/tkflare1/ride-sharing" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                            <a href="https://web-rose-one-95.vercel.app" target="_blank" rel="noopener noreferrer">Live demo ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured">
+                    <a class="featured__img" href="https://github.com/tkflare1/fishassist" target="_blank" rel="noopener noreferrer">
+                        <img src="./assets/fishassist-dashboard.png" alt="FishAssist dashboard"/>
+                    </a>
+                    <div class="featured__info">
+                        <p class="mono-label">Mobile application</p>
+                        <h3 class="featured__title">FishAssist — Smart Fish Farming</h3>
+                        <p class="featured__desc">A comprehensive Flutter mobile app for fish farmers. Real-time pond telemetry, ML-powered harvest forecasting, anomaly detection, automated actuator control, inventory management, and weather integration.</p>
+                        <div class="tags"><span>Flutter</span><span>Dart</span><span>ML</span><span>IoT</span></div>
+                        <div class="featured__links">
+                            <a href="https://github.com/tkflare1/fishassist" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured">
+                    <a class="featured__img" href="https://github.com/tkflare1/robot-car" target="_blank" rel="noopener noreferrer">
+                        <img src="./assets/robotcar-closeup.png" alt="Gesture-controlled robot car"/>
+                    </a>
+                    <div class="featured__info">
+                        <p class="mono-label">Embedded systems</p>
+                        <h3 class="featured__title">Robot Car with WiFi Camera</h3>
+                        <p class="featured__desc">A gesture-controlled robot car with live camera streaming. Three STM32L4R5 microcontrollers, a pressure-sensor glove for Bluetooth control, dual DC motors, OV2640 + ESP32 streaming, and a Next.js web viewer.</p>
+                        <div class="tags"><span>STM32</span><span>Bluetooth</span><span>ESP32</span><span>Next.js</span></div>
+                        <div class="featured__links">
+                            <a href="https://github.com/tkflare1/robot-car" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured">
+                    <a class="featured__img" href="https://agents-starter.keithvhuru.workers.dev/" target="_blank" rel="noopener noreferrer">
+                        <img src="./assets/assistant.png" alt="AI agent interface"/>
+                    </a>
+                    <div class="featured__info">
+                        <p class="mono-label">Cloud / Edge</p>
+                        <h3 class="featured__title">AI Network Troubleshooting Agent</h3>
+                        <p class="featured__desc">Chat-based interface for creating and managing network incidents, adding notes, resolving issues, and scheduling tasks with persistent state. Built on Cloudflare Agents and Durable Objects.</p>
+                        <div class="tags"><span>Cloudflare Workers</span><span>Durable Objects</span><span>TypeScript</span></div>
+                        <div class="featured__links">
+                            <a href="https://agents-starter.keithvhuru.workers.dev/" target="_blank" rel="noopener noreferrer">Live demo ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="archive-heading">More projects</h3>
+                <div class="archive">
+                    <a class="archive-row" href="https://github.com/tkflare1/final-project-sample" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">WanderWise</span>
+                        <span class="archive-row__desc">iOS travel planner with API destinations, favorites, trip plans, and AI advice</span>
+                        <span class="archive-row__tech">Swift · iOS</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://empower-lilac.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">Personal Blog</span>
+                        <span class="archive-row__desc">Full-stack blog with Sanity CMS, rich posts, and content workflows</span>
+                        <span class="archive-row__tech">Next.js · Sanity · TypeScript</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://github.com/tkflare1/EE180lab3" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">Pipelined MIPS CPU</span>
+                        <span class="archive-row__desc">Five-stage pipeline with forwarding, stalling, and atomic instructions</span>
+                        <span class="archive-row__tech">Verilog · FPGA</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://github.com/tkflare1/ee180lab2final" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">Sobel Edge Detection</span>
+                        <span class="archive-row__desc">Custom hardware accelerator with line-buffered pipelines for real-time video</span>
+                        <span class="archive-row__tech">Verilog · FPGA</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://github.com/tkflare1/ee180lab2final" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">ARM NEON Video Filters</span>
+                        <span class="archive-row__desc">Grayscale and Sobel filters with NEON intrinsics, multi-threaded benchmarks</span>
+                        <span class="archive-row__tech">C · ARM NEON</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://github.com/tkflare1/curtain-opener" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">Mango Pi Curtain Opener</span>
+                        <span class="archive-row__desc">RTC and I2C drivers, IR remote control, bare-metal shell interface</span>
+                        <span class="archive-row__tech">C · Mango Pi</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://github.com/tkflare1/ee108/tree/main/EE108/final_project" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">Dynamic Music Player</span>
+                        <span class="archive-row__desc">Pipelined audio synthesis with chords, harmonics, echo, and VGA display</span>
+                        <span class="archive-row__tech">Verilog · FPGA</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://github.com/tkflare1/ee108/tree/main/EE108/lab2" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">Programmable Bike Light</span>
+                        <span class="archive-row__desc">FSM-driven blinker with timer, shifter, and DFF-based sequential logic</span>
+                        <span class="archive-row__tech">Verilog</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://github.com/tkflare1/enigma" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">Enigma Machine</span>
+                        <span class="archive-row__desc">Classic rotor-based encryption simulation with configurable UI</span>
+                        <span class="archive-row__tech">JavaScript</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                    <a class="archive-row" href="https://github.com/tkflare1/ee108/tree/main/EE108/lab1" target="_blank" rel="noopener noreferrer">
+                        <span class="archive-row__name">Password Auth System</span>
+                        <span class="archive-row__desc">CAM-based parallel username lookup with hardware hash verification</span>
+                        <span class="archive-row__tech">Verilog · FPGA</span>
+                        <span class="archive-row__arrow">↗</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ Skills ══ -->
+        <section id="skills" class="section">
+            <div class="container">
+                <p class="mono-label">Skills</p>
+                <h2 class="section__heading">What I work with</h2>
+                <div class="skills">
+                    <div class="skills__group">
+                        <h3>Languages</h3>
+                        <p>Python · C / C++ · JavaScript · Swift · HTML / CSS · Assembly (RISC-V, MIPS)</p>
+                    </div>
+                    <div class="skills__group">
+                        <h3>Frameworks &amp; tools</h3>
+                        <p>React · Node.js · Next.js · Flutter · Tailwind · Git · Linux / Unix · Machine Learning</p>
+                    </div>
+                    <div class="skills__group">
+                        <h3>Hardware &amp; RTL</h3>
+                        <p>Verilog · SystemVerilog · FPGA synthesis · Digital logic &amp; FSM · Timing analysis · ASIC flow · Embedded C · I2C / SPI / UART · ARM NEON · PCB basics</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="section-block">
-            <div class="layout-wrap">
-                <p class="section-block__label">01 — About</p>
-                <h2 class="section-block__title">Code, copper, and curiosity.</h2>
-                <div class="about__grid">
-                    <blockquote class="about__pull">2+ years across software development and hardware engineering — interns, R&amp;D, coursework, and things I built because I wanted to see them exist.</blockquote>
-                    <div class="about__body">
-                        <p>Experienced with software development and electrical engineering through intern roles, R&amp;D projects, coursework, and personal projects. Comfortable across Python-centric stacks and low-level bring-up.</p>
-                        <p>Proven track record in finishing what I start and keeping collaborators in the loop.</p>
-                        <dl class="about__facts">
-                            <div class="about__facts-row">
-                                <dt>Education</dt>
-                                <dd>Stanford University — B.S. Electrical Engineering &amp; Computer Science</dd>
-                            </div>
-                            <div class="about__facts-row">
-                                <dt>Focus</dt>
-                                <dd>Web &amp; mobile · Embedded · RTL / FPGA</dd>
-                            </div>
-                        </dl>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="work" class="section-block">
-            <div class="layout-wrap">
-                <p class="section-block__label">02 — Selected work</p>
-                <h2 class="section-block__title">Things worth the late nights.</h2>
-                <div class="work-list">
-
-                    <article class="work-item">
-                        <span class="work-item__index">01</span>
-                        <a class="work-item__media" href="https://web-rose-one-95.vercel.app" target="_blank" rel="noopener noreferrer">
-                            <img src="./assets/ridematch-screenshot.png" alt="RideMatch app"/>
-                        </a>
-                        <div class="work-item__body">
-                            <span class="work-item__tag">Web · Next.js</span>
-                            <h3 class="work-item__title">RideMatch</h3>
-                            <p class="work-item__desc">Student ridesharing to the airport — swipeable cards, chat, requests, ratings, and privacy controls. Next.js 16, Tailwind v4, Zustand, Firebase.</p>
-                            <div class="work-item__links">
-                                <a class="work-link" href="https://github.com/tkflare1/ride-sharing" target="_blank" rel="noopener noreferrer">GitHub</a>
-                                <a class="work-link" href="https://web-rose-one-95.vercel.app" target="_blank" rel="noopener noreferrer">Live</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="work-item">
-                        <span class="work-item__index">02</span>
-                        <a class="work-item__media" href="https://github.com/tkflare1/fishassist" target="_blank" rel="noopener noreferrer">
-                            <img src="./assets/fishassist-dashboard.png" alt="FishAssist"/>
-                        </a>
-                        <div class="work-item__body">
-                            <span class="work-item__tag">Mobile · Flutter</span>
-                            <h3 class="work-item__title">FishAssist</h3>
-                            <p class="work-item__desc">Aquaculture ops in one app: pond telemetry, ML forecasting, anomaly detection, actuator control, inventory, weather, multilingual UI.</p>
-                            <div class="work-item__links">
-                                <a class="work-link" href="https://github.com/tkflare1/fishassist" target="_blank" rel="noopener noreferrer">GitHub</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="work-item">
-                        <span class="work-item__index">03</span>
-                        <a class="work-item__media" href="https://github.com/tkflare1/robot-car" target="_blank" rel="noopener noreferrer">
-                            <img src="./assets/robotcar-closeup.png" alt="Robot car"/>
-                        </a>
-                        <div class="work-item__body">
-                            <span class="work-item__tag">Embedded · STM32</span>
-                            <h3 class="work-item__title">Gesture robot + camera</h3>
-                            <p class="work-item__desc">Three STM32L4 boards, Bluetooth glove control, dual motors, OV2640 + ESP32 stream, Next.js viewer for live video.</p>
-                            <div class="work-item__links">
-                                <a class="work-link" href="https://github.com/tkflare1/robot-car" target="_blank" rel="noopener noreferrer">GitHub</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="work-item">
-                        <span class="work-item__index">04</span>
-                        <a class="work-item__media" href="https://agents-starter.keithvhuru.workers.dev/" target="_blank" rel="noopener noreferrer">
-                            <img src="./assets/assistant.png" alt="AI agent UI"/>
-                        </a>
-                        <div class="work-item__body">
-                            <span class="work-item__tag">Cloudflare · Agents</span>
-                            <h3 class="work-item__title">AI network troubleshooting agent</h3>
-                            <p class="work-item__desc">Chat UI for incidents, notes, resolution, and scheduled tasks — Durable Objects, Workers, persistent state on the edge.</p>
-                            <div class="work-item__links">
-                                <a class="work-link" href="https://github.com/your-username/ai-network-troubleshooting-agent" target="_blank" rel="noopener noreferrer">GitHub</a>
-                                <a class="work-link" href="https://agents-starter.keithvhuru.workers.dev/" target="_blank" rel="noopener noreferrer">Demo</a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-                <p class="work-cta">
-                    <button type="button" class="btn btn--ghost" onclick="location.href='projects.html'">Full project archive →</button>
-                </p>
-            </div>
-        </section>
-
-        <section id="contact" class="contact-block">
-            <div class="layout-wrap">
-                <p class="section-block__label">03 — Contact</p>
-                <p class="contact-block__big"><a href="mailto:tawekith@stanford.edu">tawekith@stanford.edu</a></p>
-                <p class="hero__tagline" style="margin:0">Open to interesting roles and collaborations.</p>
-                <div class="contact-block__row">
-                    <a href="https://linkedin.com/in/tawedzerwa-vhurumuku" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://github.com/tkflare1" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="skills.html">Skills sheet</a>
+        <!-- ══ Contact ══ -->
+        <section id="contact" class="section">
+            <div class="container">
+                <p class="mono-label">Contact</p>
+                <h2 class="section__heading">Let's connect</h2>
+                <p class="contact__sub">Open to interesting roles and collaborations.</p>
+                <a class="contact__email" href="mailto:tawekith@stanford.edu">tawekith@stanford.edu</a>
+                <div class="contact__links">
+                    <a href="https://linkedin.com/in/tawedzerwa-vhurumuku" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                    <a href="https://github.com/tkflare1" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <nav>
-            <div class="nav-links-container">
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#work">Work</a></li>
-                    <li><a href="skills.html">Skills</a></li>
-                    <li><a href="fpga/">FPGA</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-        <p>© 2025 Tawedzerwa Keith Vhurumuku</p>
+        <div class="container footer__inner">
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="fpga/">FPGA</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <p>© 2025 Tawedzerwa Keith Vhurumuku</p>
+        </div>
     </footer>
     <script src="script.js"></script>
 </body>
