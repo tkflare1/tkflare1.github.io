@@ -266,10 +266,6 @@
     * {
         animation-duration: 0.3s !important;
     }
-    
-    .section__pic-container::before {
-        animation: none;
-    }
 }
 
 /* Extra Small Devices */

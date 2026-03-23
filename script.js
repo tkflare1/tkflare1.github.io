@@ -1,6 +1,5 @@
 // ============================
 // PORTFOLIO INTERACTIONS
-// Dark Elite Theme
 // ============================
 
 // Toggle hamburger menu
@@ -76,22 +75,23 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Navbar background on scroll
-const nav = document.querySelector('nav');
+// Navbar background on scroll (both desktop and mobile nav bars)
+const navBars = document.querySelectorAll('body > nav');
 let lastScrollY = window.scrollY;
 
 window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
-    
-    // Add/remove scrolled class for navbar styling
-    if (currentScrollY > 100) {
-        nav.style.background = 'rgba(10, 10, 10, 0.95)';
-        nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
-    } else {
-        nav.style.background = 'rgba(10, 10, 10, 0.8)';
-        nav.style.boxShadow = 'none';
-    }
-    
+
+    navBars.forEach((navEl) => {
+        if (currentScrollY > 100) {
+            navEl.style.background = 'rgba(10, 10, 10, 0.96)';
+            navEl.style.boxShadow = '0 1px 0 rgba(255, 255, 255, 0.06)';
+        } else {
+            navEl.style.background = 'rgba(10, 10, 10, 0.85)';
+            navEl.style.boxShadow = 'none';
+        }
+    });
+
     lastScrollY = currentScrollY;
 });
 
@@ -141,7 +141,7 @@ cursorGlow.style.cssText = `
     position: fixed;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(0, 212, 170, 0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
@@ -178,7 +178,7 @@ window.addEventListener('scroll', () => {
 const activeStyle = document.createElement('style');
 activeStyle.textContent = `
     .nav-links a.active {
-        color: #00d4aa !important;
+        color: #f5f5f5 !important;
     }
     .nav-links a.active::after {
         width: 100%;
@@ -198,6 +198,6 @@ document.querySelectorAll('.btn').forEach(btn => {
 });
 
 // Console easter egg
-console.log('%c👋 Hey there, fellow developer!', 'font-size: 20px; font-weight: bold; color: #00d4aa;');
+console.log('%cHey there, fellow developer.', 'font-size: 16px; font-weight: bold; color: #e5e5e5;');
 console.log('%cThanks for checking out my portfolio. Feel free to reach out!', 'font-size: 14px; color: #a0a0a0;');
 console.log('%c- Tawedzerwa Keith Vhurumuku', 'font-size: 12px; color: #666;');
